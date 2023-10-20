@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # handle /challenges/ calls
-    path("", views.index),
+    path("", views.index, name="index"),
     # handle URLs containing a number
     path("<int:month>", views.monthly_challenge_by_number),
     # handle URLs containing a string
