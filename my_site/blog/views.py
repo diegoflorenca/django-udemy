@@ -9,4 +9,4 @@ def posts(request):
     return render(request, "blog/all-posts.html")
 
 def post_detail(request, post_slug):
-    return render(request, "blog/post.html")
+    pass #return render(request, "blog/post.html")
