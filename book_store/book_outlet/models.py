@@ -9,6 +9,14 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
+    # a special method that returns the author's full name
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    # Display the author's first and last name on the admin portal
+    def __str__(self):
+        return self.full_name()
+
 class Book(models.Model):
     title = models.CharField(max_length=50)
     # The rating should not be between 1 and 5
