@@ -2,7 +2,19 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils.text import slugify
+
 # Create your models here.
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=80)
+    code = models.CharField(max_length=2)
+
+    def __str__(self):
+        return f"{self.name} {self.code}"
+
+    class Meta:
+        verbose_name_plural = "Countries"
 
 
 class Address(models.Model):
@@ -12,7 +24,7 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.street}, {self.postal_code}, {self.city}"
-    
+
     class Meta:
         verbose_name_plural = "Address Entries"
 
@@ -42,6 +54,7 @@ class Book(models.Model):
         Author, on_delete=models.CASCADE, null=True, related_name="books")
     is_bestselling = models.BooleanField(default=False)
     slug = models.SlugField(default="", blank=True, null=False, db_index=True)
+    published_countries = models.ManyToManyField(Country)
 
     def get_absolute_url(self):
         return reverse("book-detail", kwargs={"slug": self.slug})
