@@ -70,10 +70,13 @@ from .models import Post
 #     }
 # ]
 
+
 def get_date(post):
     return post['date']
 
 # Create your views here.
+
+
 def starting_page(request):
     posts = Post.objects.all().order_by("-date")
     # sorted_posts = sorted(all_posts, key=get_date)
@@ -82,11 +85,13 @@ def starting_page(request):
         "posts": posts
     })
 
+
 def posts(request):
     posts = Post.objects.all().order_by("-date")
     return render(request, "blog/all-posts.html", {
         "all_posts": posts
     })
+
 
 def post_detail(request, slug):
     # get the post with the given slug
