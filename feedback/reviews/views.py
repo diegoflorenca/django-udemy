@@ -3,5 +3,5 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def index(request):
+def review(request):
     return render(request, "reviews/index.html")
