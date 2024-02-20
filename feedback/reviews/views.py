@@ -1,9 +1,11 @@
+from typing import Any
 from django.shortcuts import render
 from .forms import ReviewForm
 # from .models import Review
 from django.views import View
+from django.views.generic.base import TemplateView
 
-# Create your views here.
+# Class based view
 class ReviewView(View):
     def get(self, request):
         form = ReviewForm()
@@ -24,8 +26,16 @@ class ReviewView(View):
             "form": form
         })
 
+class ThankYouView(TemplateView):
+    template_name = "reviews.thank_you.html"
 
-# Function based view
+    # add or manipulate data sent to the template
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["msg"] = "This works!"
+        return context
+
+# Function based views
 # def review(request):
 #     if request.method == 'POST':
 #         form = ReviewForm(request.POST)
@@ -46,6 +56,5 @@ class ReviewView(View):
 #         "form": form
 #     })
 
-
-def thank_you(request):
-    return render(request, "reviews/thank_you.html")
+# def thank_you(request):
+    # return render(request, "reviews/thank_you.html")
