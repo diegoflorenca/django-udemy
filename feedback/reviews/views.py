@@ -1,7 +1,6 @@
-from typing import Any
 from django.shortcuts import render
 from .forms import ReviewForm
-# from .models import Review
+from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
 
@@ -27,12 +26,22 @@ class ReviewView(View):
         })
 
 class ThankYouView(TemplateView):
-    template_name = "reviews.thank_you.html"
+    template_name = "reviews/thank_you.html"
 
     # add or manipulate data sent to the template
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["msg"] = "This works!"
+        context["message"] = "This works!"
+        return context
+    
+class ReviewsListView(TemplateView):
+    model = Review
+    template_name = "reviews/reviews_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reviews = Review.objects.all()
+        context["reviews"] = reviews
         return context
 
 # Function based views
