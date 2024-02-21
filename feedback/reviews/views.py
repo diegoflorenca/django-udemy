@@ -43,6 +43,16 @@ class ReviewsListView(TemplateView):
         reviews = Review.objects.all()
         context["reviews"] = reviews
         return context
+    
+class ReviewDetail(TemplateView):
+    template_name = "reviews/review_detail.html"
+
+    def get_context_data(self, **kwargs):
+        id = self.kwargs["id"]
+        context = super().get_context_data(**kwargs)
+        details = Review.objects.get(id=id)
+        context["details"] = details
+        return context
 
 # Function based views
 # def review(request):
