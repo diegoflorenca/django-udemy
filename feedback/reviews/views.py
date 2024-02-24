@@ -1,22 +1,28 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .forms import ReviewForm
 from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 
 # Class based view
-# Using FormView as oppose to View
-class ReviewView(FormView):
+# Using CreateVie as oppose to FormView
+class ReviewView(CreateView):
+    model = Review
     form_class = ReviewForm
     template_name = "reviews/index.html"
     success_url = "/thank-you"
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+# Using FormView as oppose to View
+# class ReviewView(FormView):
+#     form_class = ReviewForm
+#     template_name = "reviews/index.html"
+#     success_url = "/thank-you"
+
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
 
 
 # class ReviewView(View):
