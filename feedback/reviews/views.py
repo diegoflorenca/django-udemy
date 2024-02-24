@@ -4,7 +4,7 @@ from .forms import ReviewForm
 from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Class based view
 class ReviewView(View):
@@ -35,7 +35,19 @@ class ThankYouView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["message"] = "This works!"
         return context
-    
+
+# Using ListView as oppose to TemplateView
+class ReviewsListView(ListView):
+    template_name = "reviews/reviews_list.html"
+    model = Review
+    context_object_name = "reviews"
+
+    # Narrow down the data exported to the template
+    # def get_queryset(self):
+    #     base_query =  super().get_queryset()
+    #     data = base_query.filter(rating__gt=4)
+    #     return data
+
 # class ReviewsListView(TemplateView):
 #     template_name = "reviews/reviews_list.html"
 
@@ -45,27 +57,20 @@ class ThankYouView(TemplateView):
 #         context["reviews"] = reviews
 #         return context
 
-# Using ListView as oppose to TemplateView
-class ReviewsListView(ListView):
-    template_name = "reviews/reviews_list.html"
-    model = Review
-    context_object_name = "reviews"
-
-# narrow
-    # def get_queryset(self):
-    #     base_query =  super().get_queryset()
-    #     data = base_query.filter(rating__gt=4)
-    #     return data
-
-class SingleReviewView(TemplateView):
+# Using DetailView as oppose to TemplateView
+class SingleReviewView(DetailView):
     template_name = "reviews/single_review.html"
+    model = Review
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        review_id = kwargs["id"]
-        selected_review = Review.objects.get(pk=review_id)
-        context["review"] = selected_review
-        return context
+# class SingleReviewView(TemplateView):
+#     template_name = "reviews/single_review.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         review_id = kwargs["id"]
+#         selected_review = Review.objects.get(pk=review_id)
+#         context["review"] = selected_review
+#         return context
 
 # Function based views
 # def review(request):
