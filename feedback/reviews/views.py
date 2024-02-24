@@ -5,27 +5,39 @@ from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 
 # Class based view
-class ReviewView(View):
-    def get(self, request):
-        form = ReviewForm()
+# Using FormView as oppose to View
+class ReviewView(FormView):
+    form_class = ReviewForm
+    template_name = "reviews/index.html"
+    success_url = "/thank-you"
 
-        return render(request, "reviews/index.html", {
-            "form": form
-        })
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+# class ReviewView(View):
+#     def get(self, request):
+#         form = ReviewForm()
+
+#         return render(request, "reviews/index.html", {
+#             "form": form
+#         })
     
-    def post(self, request):
-        form = ReviewForm(request.POST)
+#     def post(self, request):
+#         form = ReviewForm(request.POST)
 
-        if form.is_valid():
-            form.save()
-            return render(request, "reviews/thank_you.html")
+#         if form.is_valid():
+#             form.save()
+#             return render(request, "reviews/thank_you.html")
         
-        # render the form with the error messages if the form is not valid
-        return render(request, "reviews/index.html", {
-            "form": form
-        })
+#         # render the form with the error messages if the form is not valid
+#         return render(request, "reviews/index.html", {
+#             "form": form
+#         })
 
 class ThankYouView(TemplateView):
     template_name = "reviews/thank_you.html"
