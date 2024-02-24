@@ -26,14 +26,14 @@ class ReviewView(FormView):
 #         return render(request, "reviews/index.html", {
 #             "form": form
 #         })
-    
+
 #     def post(self, request):
 #         form = ReviewForm(request.POST)
 
 #         if form.is_valid():
 #             form.save()
 #             return render(request, "reviews/thank_you.html")
-        
+
 #         # render the form with the error messages if the form is not valid
 #         return render(request, "reviews/index.html", {
 #             "form": form
