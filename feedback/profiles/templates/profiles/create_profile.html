@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Create a Profile{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static "profiles/style.css" %}">
+{% endblock style %}
+{% block content %} 
+    <form>
+        <input type="file" />
+        <button>Upload!</button>
+    </form>
+{% endblock content %}

@@ -1,9 +1,10 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
 {% load static %}
 {% block title %}Your Review{% endblock title %}
 {% block style %}
   <link rel="stylesheet" href="{% static "reviews/style.css" %}">
 {% endblock style %}
+{% block content %}
 <form action="/" method="POST">
   {% comment %} 
   <label for="username">Your name</label>
