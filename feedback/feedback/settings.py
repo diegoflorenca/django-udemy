@@ -126,3 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Folder where the image will be uploaded
 MEDIA_ROOT = BASE_DIR / "uploads"
+
+# Part of the URL that will be exposed.
+MEDIA_URL = "/user-media/"

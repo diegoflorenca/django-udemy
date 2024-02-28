@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Create a Profile{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static "profiles/style.css" %}">
+{% endblock style %}
+{% block content %} 
+    <ul>
+        {% for profile in profiles %}
+            <li>
+                <img 
+                    src="{{ profile.image.url }}"
+                    alt="User profile image"
+                    width="25px"
+                >
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
