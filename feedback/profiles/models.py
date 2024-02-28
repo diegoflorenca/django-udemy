@@ -4,5 +4,6 @@ from django.db import models
 
 
 class UserProfile(models.Model):
-    # The FileField will not be stored on the database. Files must be save on the hard drive.
-    image = models.FileField(upload_to="images")
+    # ImageField requires an extra package
+    # python3 -m pip install Pillow
+    image = models.ImageField(upload_to="images")
