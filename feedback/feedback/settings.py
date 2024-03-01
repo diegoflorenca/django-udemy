@@ -129,3 +129,7 @@ MEDIA_ROOT = BASE_DIR / "uploads"
 
 # Part of the URL that will be exposed.
 MEDIA_URL = "/user-media/"
+
+# The default session age configure is two weeks,
+# but we can modify this property with this configuration
+# SESSION_COOKIE_AGE = 120

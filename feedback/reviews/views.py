@@ -8,6 +8,8 @@ from django.views.generic.edit import FormView, CreateView
 
 # Class based view
 # Using CreateVie as oppose to FormView
+
+
 class ReviewView(CreateView):
     model = Review
     form_class = ReviewForm
@@ -55,6 +57,8 @@ class ThankYouView(TemplateView):
         return context
 
 # Using ListView as oppose to TemplateView
+
+
 class ReviewsListView(ListView):
     template_name = "reviews/reviews_list.html"
     model = Review
@@ -76,6 +80,8 @@ class ReviewsListView(ListView):
 #         return context
 
 # Using DetailView as oppose to TemplateView
+
+
 class SingleReviewView(DetailView):
     template_name = "reviews/single_review.html"
     model = Review
@@ -113,3 +119,11 @@ class SingleReviewView(DetailView):
 
 # def thank_you(request):
     # return render(request, "reviews/thank_you.html")
+
+
+class AddFavoriteReviewView(View):
+    def post(self, request):
+        review_id = request.POST["review_id"]
+        favorite_review = Review.objects.get(pk=review_id)
+        print(favorite_review.review_text)
+        return render(request, "reviews/thank_you.html")
