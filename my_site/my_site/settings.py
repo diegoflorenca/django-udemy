@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # This is the name of the app we created in the previous section. 
-    # This is important because Django will look for templates in the app folders. 
+    # This is the name of the app we created in the previous section.
+    # This is important because Django will look for templates in the app folders.
     # If you don't add the app name here, Django will not be able to find the templates.
     'blog',
     'django.contrib.admin',
@@ -131,3 +131,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = BASE_DIR / "blog/static/blog"
+MEDIA_URL = "/"
