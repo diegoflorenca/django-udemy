@@ -73,3 +73,21 @@ main {
   padding: 0.2rem 0.5rem;
   border-radius: 8px;
 }
+
+#read-later {
+  display: flex;
+  justify-content: right;
+}
+
+#read-later button {
+  background-color: #390281;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+#read-later button:hover {
+  background-color: #6305dd;
+}

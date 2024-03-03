@@ -27,6 +27,18 @@
     </section>
 
     <main>
+        <div id="read-later">
+            {% if is_read_later %}
+                <p>Marked as read later.</p>
+            {% else %}
+                <form action="/posts/read-later/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <input type="hidden" name="post_slug" value="{{ post.slug }}">
+                    <button>Read later</button>
+                </form>
+            {% endif %}
+        </div>
         {{ post.content | linebreaks }}
     </main>
     {% endblock %}
