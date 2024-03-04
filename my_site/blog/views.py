@@ -2,8 +2,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import View
+from django.views.generic.edit import CreateView
 
-from .models import Post
+from .models import Post, Comment
 
 # Create your views here.
 
@@ -45,4 +46,17 @@ class ReadLaterView(View):
         post_id = request.POST["post_id"]
         post_slug = request.POST["post_slug"]
         request.session["read-later"] = int(post_id)
+        return HttpResponseRedirect(reverse("post-detail-page", args=[post_slug]))
+
+
+class AddCommentView(View):
+    def post(self, request):
+        post_id = Post.objects.get(pk=request.POST["post_id"])
+        user_name = request.POST["name"]
+        comment = request.POST["comment"]
+        post_slug = request.POST["post_slug"]
+
+        new_comment = Comment(post_id=post_id, name=user_name, text=comment)
+        new_comment.save()
+
         return HttpResponseRedirect(reverse("post-detail-page", args=[post_slug]))

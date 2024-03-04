@@ -41,4 +41,15 @@
         </div>
         {{ post.content | linebreaks }}
     </main>
+    <div>
+        <h2>Leave a comment</h2>
+        <form action="/posts/comment/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value={{ post.id }}>
+            <input type="hidden" name="post_slug" value={{ post.slug }}>
+            <input type="text" name="name" >
+            <input type="text" name="comment" >
+            <button>Comment</button>
+        </form>
+    </div>
     {% endblock %}
