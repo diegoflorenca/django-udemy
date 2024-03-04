@@ -40,6 +40,14 @@
             {% endif %}
         </div>
         {{ post.content | linebreaks }}
+        <h2>Comments</h2>
+        <ul>
+            {% for comment in comments %}
+            <li>
+                {{ comment.name }}: {{ comment.text }}
+            </li>
+            {% endfor %}
+        </ul>
     </main>
     <div>
         <h2>Leave a comment</h2>

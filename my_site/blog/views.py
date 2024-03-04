@@ -27,10 +27,12 @@ def post_detail(request, slug):
     identified_post = get_object_or_404(Post, slug=slug)
     post_tags = identified_post.tags.all()
     is_read_later = request.session.get("read-later") == identified_post.id
+    comments = Comment.objects.filter(post_id=identified_post)
     return render(request, "blog/post-details.html", {
         "post": identified_post,
         "tags": post_tags,
-        "is_read_later": is_read_later
+        "is_read_later": is_read_later,
+        "comments": comments
     })
 
 
